@@ -30,28 +30,34 @@
                 <span class="material-symbols-sharp">replay</span>
             </div>
             <div id="prev"
-                class="md:hover:bg-white md:hover:text-black cursor-pointer py-2 px-3 align-middle content-center drop-shadow">
+                class="md:hover:bg-white md:hover:text-black cursor-pointer py-2 px-3 drop-shadow">
                 <span class="material-symbols-sharp">skip_previous</span>
             </div>
             <div id="playPause"
-                class="md:hover:bg-white md:hover:text-black cursor-pointer py-2 px-3 align-middle content-center drop-shadow">
+                class="md:hover:bg-white md:hover:text-black cursor-pointer py-2 px-3 drop-shadow">
                 <span id="playIcon" class="material-symbols-sharp">play_arrow</span>
             </div>
             <div id="next"
-                class="md:hover:bg-white md:hover:text-black cursor-pointer py-2 px-3 align-middle content-center drop-shadow">
+                class="md:hover:bg-white md:hover:text-black cursor-pointer py-2 px-3 drop-shadow">
                 <span class="material-symbols-sharp">skip_next</span>
             </div>
             <div id="fullscreen"
-                class="md:hover:bg-white md:hover:text-black cursor-pointer py-2 px-3 align-middle content-center drop-shadow"
+                class="md:hover:bg-white md:hover:text-black cursor-pointer py-2 px-3 drop-shadow"
                 onclick="askFullscreen();">
-                <span id="fullscreen-icon" class="material-symbols-sharp">fullscreen</span></div>
+                <span id="fullscreen-icon" class="material-symbols-sharp">fullscreen</span>
+            </div>
+            <div id="copyUrl"
+                class="fixed right-0 bottom-0 md:hover:bg-white md:hover:text-black cursor-pointer py-2 px-3 drop-shadow"
+                onclick="copyToClipboard();">
+                <span id="fullscreen-icon" class="material-symbols-sharp">content_copy</span>
+            </div>
         </div>
     </div>
-    <div id="now-playing" class="fixed md:left-0 md:bottom-0 max-md:top-0 max-md:right-0 p-3 invert select-text">Đang tải...</div>
+    <div id="now-playing" class="fixed md:left-0 md:bottom-0 max-md:top-0 max-md:right-0 p-3 invert select-text">Đang
+        tải...</div>
     <script>
         const player = document.getElementById("videoPlayer")
         const random_url = "https://api.animethemes.moe/video/?sort=random"
-        const entry_info = "https://api.animethemes.moe/animetheme/"
         var play_index = -1
         player.addEventListener("pause", () => document.getElementById("playIcon").textContent = 'play_arrow');
         player.addEventListener("play", () => document.getElementById("playIcon").textContent = 'pause');
@@ -152,6 +158,9 @@
             document.getElementById("loadingText").innerText = "Đang tải Playlist...";
             loadPlaylist(random_url);
         });
+        function copyToClipboard() {
+            navigator.clipboard.writeText(player.src);
+        }
         document.addEventListener("keyup", (e) => {
             if (document.getElementById("loadingBtn") !== null) {
                 let load = document.getElementById("loadingBtn");
